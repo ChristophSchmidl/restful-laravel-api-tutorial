@@ -10,7 +10,7 @@
 ## About Restful Laravel Api Tutorial
 
 This repository is based on the work of André Castelo's article which you can find <a href="https://www.toptal.com/laravel/restful-laravel-api-tutorial">here</a>.
-I fixed some errors and issues which I disagreed with, namely:
+No additional packages were used to implement this simple API example. I fixed some errors and issues which I disagreed with, namely:
 
 * The ```generateToken``` method on the User model was missing
 * The naming convention of the feature tests was not consistent
