@@ -16,7 +16,13 @@ No additional packages were used to implement this simple API example. I fixed s
 * The naming convention of the feature tests was not consistent
 * ArticeTest did not work properly based on the fact that ```Artisan::call('db:seed');``` was called in the ```setUp``` method of ```TestCase```
 * Wrong assertions of statusCodes in ```ArticleTest```
-* I did not alter the sqlite entry in ```config/database.php``` but altered ```phpunit.xml``` to use sqlite in-memory.
+* I did not alter the sqlite entry in ```config/database.php``` but altered ```phpunit.xml``` to use sqlite in-memory and/or a test database.
+* Integrated trait ```DatabaseSetup``` into TestCase.php written by Adam Wathan. See: <a href="https://vimeo.com/191528875">Vimeo</a> and <a href="https://gist.github.com/adamwathan/dd46a8501097942a771925c02bac0111">Github Gist</a>
+* ```DatbaseSetup``` has several advantages over ```Illuminate\Foundation\Testing\DatabaseMigrations``` and ```Illuminate\Foundation\Testing\DatabaseTransactions```
+	* It checks if phpunit is using an in-memory database or a test database and acts upon this information
+	* If it uses in-memory database, then each test method triggers the artisan migrate command which makes tests independent of each other since transactions are not supported here?
+	* If it uses a test database, then the migration is only executed once at the beginning of the whole test run. Each test method is then executed inside a transaction to guarantee independence.
+	* If you want to use a test database then you only have to create one and alter the information in the phpunit.xml file. No additional changes to ```config/database.php``` or ```.env``` neccessary.
 
 
 ## What could be improved in future versions?

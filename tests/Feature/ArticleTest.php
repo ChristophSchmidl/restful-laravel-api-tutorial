@@ -5,9 +5,7 @@ namespace Tests\Feature;
 use App\Article;
 use App\User;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 
 class ArticleTest extends TestCase
 {
@@ -20,13 +18,13 @@ class ArticleTest extends TestCase
         $token = $user->generateToken();
         $headers = ['Authorization' => "Bearer $token"];
         $payload = [
-            'title' => 'Lorem',
-            'body' => 'Ipsum',
+            'title' => 'Lorem1',
+            'body' => 'Ipsum1',
         ];
 
-        $response = $this->json('POST', 'api/articles', $payload, $headers)
+        $this->json('POST', 'api/articles', $payload, $headers)
             ->assertStatus(201)
-            ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
+            ->assertJson(['id' => 1, 'title' => 'Lorem1', 'body' => 'Ipsum1']);
     }
 
     /**
@@ -37,22 +35,23 @@ class ArticleTest extends TestCase
         $user = factory(User::class)->create();
         $token = $user->generateToken();
         $headers = ['Authorization' => "Bearer $token"];
+
         $article = factory(Article::class)->create([
             'title' => 'First Article',
             'body' => 'First Body',
         ]);
 
         $payload = [
-            'title' => 'Lorem',
-            'body' => 'Ipsum',
+            'title' => 'Updated First Article',
+            'body' => 'Updated Body',
         ];
 
         $response = $this->json('PUT', 'api/articles/' . $article->id, $payload, $headers)
             ->assertStatus(200)
             ->assertJson([
-                'id' => 1,
-                'title' => 'Lorem',
-                'body' => 'Ipsum'
+                'id' => $article->id,
+                'title' => 'Updated First Article',
+                'body' => 'Updated Body'
             ]);
     }
 
