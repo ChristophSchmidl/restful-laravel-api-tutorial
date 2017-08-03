@@ -11,7 +11,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class ArticleTest extends TestCase
 {
-    public function testArticlesAreCreatedCorrectly()
+    /**
+     * @test
+     */
+    public function articles_are_created_correctly()
     {
         $user = factory(User::class)->create();
         $token = $user->generateToken();
@@ -26,7 +29,10 @@ class ArticleTest extends TestCase
             ->assertJson(['id' => 1, 'title' => 'Lorem', 'body' => 'Ipsum']);
     }
 
-    public function testArticlesAreUpdatedCorrectly()
+    /**
+     * @test
+     */
+    public function articles_are_updated_correctly()
     {
         $user = factory(User::class)->create();
         $token = $user->generateToken();
@@ -50,7 +56,10 @@ class ArticleTest extends TestCase
             ]);
     }
 
-    public function testArticlesAreDeletedCorrectly()
+    /**
+     * @test
+     */
+    public function articles_are_deleted_correctly()
     {
         $user = factory(User::class)->create();
         $token = $user->generateToken();
@@ -64,7 +73,10 @@ class ArticleTest extends TestCase
             ->assertStatus(204);
     }
 
-    public function testArticlesAreListedCorrectly()
+    /**
+     * @test
+     */
+    public function articles_are_listed_correctly()
     {
         factory(Article::class)->create([
             'title' => 'First Article',

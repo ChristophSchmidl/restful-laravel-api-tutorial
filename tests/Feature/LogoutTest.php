@@ -20,7 +20,10 @@ class LogoutTest extends TestCase
      * issues with the previously cached user.
      */
 
-    public function testUserIsLoggedOutProperly()
+    /**
+     * @test
+     */
+    public function user_is_logged_out_properly()
     {
         $user = factory(User::class)->create(['email' => 'user@test.com']);
         $token = $user->generateToken();
@@ -34,7 +37,10 @@ class LogoutTest extends TestCase
         $this->assertEquals(null, $user->api_token);
     }
 
-    public function testUserWithNullToken()
+    /**
+     * @test
+     */
+    public function user_with_null_token()
     {
         // Simulating login
         $user = factory(User::class)->create(['email' => 'user@test.com']);

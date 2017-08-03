@@ -10,7 +10,10 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class RegisterTest extends TestCase
 {
 
-    public function testRegistersSuccessfully()
+    /**
+     * @test
+     */
+    public function registers_successfully()
     {
         $payload = [
             'name' => 'John',
@@ -33,7 +36,10 @@ class RegisterTest extends TestCase
             ]);
     }
 
-    public function testRequiresPasswordEmailAndName()
+    /**
+     * @test
+     */
+    public function requires_password_email_and_name()
     {
         $this->json('post', '/api/register')
             ->assertStatus(422)
@@ -44,7 +50,10 @@ class RegisterTest extends TestCase
             ]);
     }
 
-    public function testRequirePasswordConfirmation()
+    /**
+     * @test
+     */
+    public function require_password_confirmation()
     {
         $payload = [
             'name' => 'John',

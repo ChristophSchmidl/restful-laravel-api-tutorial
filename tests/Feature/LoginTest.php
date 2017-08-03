@@ -19,7 +19,10 @@ class LoginTest extends TestCase
      */
 
 
-    public function testRequiresEmailAndLogin()
+    /**
+     * @test
+     */
+    public function requires_email_and_login()
     {
         $this->json('POST', 'api/login')
             ->assertStatus(422)
@@ -29,7 +32,10 @@ class LoginTest extends TestCase
             ]);
     }
 
-    public function testUserLoginsSuccessfully()
+    /**
+     * @test
+     */
+    public function user_logins_successfully()
     {
         $user = factory(User::class)->create([
             'email' => 'testlogin@user.com',
