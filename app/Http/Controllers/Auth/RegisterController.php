@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -67,5 +68,23 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    /**
+     * We are overriding this method which is coming from
+     * the RegistersUsers trait so that it generates
+     * an access token and returns the user with the token.
+     * The main functionality of RegistersUsers can therefore
+     * also be used for this API usecase.
+     *
+     * @param Request $request
+     * @param $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    protected function registered(Request $request, $user)
+    {
+        $user->generateToken();
+
+        return response()->json(['data' => $user->toArray()], 201);
     }
 }
