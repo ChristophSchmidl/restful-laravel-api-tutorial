@@ -16,8 +16,7 @@ No additional packages were used to implement this simple API example. I fixed s
 * The naming convention of the feature tests was not consistent
 * ArticeTest did not work properly based on the fact that ```Artisan::call('db:seed');``` was called in the ```setUp``` method of ```TestCase```
 * Wrong assertions of statusCodes in ```ArticleTest```
-* I did not alter the sqlite entry in ```cofig/database.php``` but added a new entry called ```testing``` which uses sqlite in memory just for testing purposes.
-* ```phunit.xml``` now uses ```<env name="DB_CONNECTION" value="testing"/>```
+* I did not alter the sqlite entry in ```config/database.php``` but altered ```phpunit.xml``` to use sqlite in-memory.
 
 
 ## What could be improved in future versions?
